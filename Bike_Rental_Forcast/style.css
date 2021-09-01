@@ -47,19 +47,6 @@ span{
 }
 
   
-@media only screen and (min-width: 600px) {
-    header{
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    body{
-        padding-top: 40px;
-        padding-bottom: 40px;
-        padding-left: 10px;
-        padding-right: 10px;
-    
-    }
-  }
 
   @media only screen and (min-width: 700px) {
     header{
