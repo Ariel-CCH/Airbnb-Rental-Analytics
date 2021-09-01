@@ -40,6 +40,10 @@ img {
     height: auto;
   }
 
+img:hover{
+    transform: scale(1.2);
+}
+
 span{
     font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace; 
     font-weight:300;
