@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap" rel="stylesheet">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Bike Rental Forecast</title>
+  </head>
+  <body>
+
+    <header>
+      <div id="title" class = "intro">
+            <h1>Bike Rental Forecast</h1>
+            <p>
+                In this task, we employ predictive data analysis to forecast the bike rental demand for a bike-share system in Taipei City.  
+                Our dataset consists of daily bike rental counts with weather and date information, and our goal is to use the historical data 
+                over the past two years to build a model to forecast bike rentals in the next six months. 
+                We identified several important factors that support our rationale behind our forecasting method using exploratory data analysis. 
+                We then experimented with different models with our data, and tuned our final model to perform better predictions. 
+                In the end, we used our method to generate forecast values for future daily total rentals.
+
+
+            </p>
+      </div>
+      <nav>
+        <ul class="nav_links">
+          <li><a href="#explore">Exploratory Analysis</a></li>
+          <li><a href="#modeling">Modeling</a>
+            <ul>
+                <li><a href="#temperature">SARIMA model for temperature</a></li>
+                <li><a href="#baseline">Baseline modeling for cnt</a></li>
+                <li><a href="#final">Final Model for cnt & Prediction Outcome</a></li>
+              </ul>
+          </li>
+        </ul>
+    </nav>
+  </header>
+   
+    <main class="container">
+      
+    <div id="explore" class = "intro">
+      <h1>Exploratory Analysis</h1>
+      <p>
+        Our original data consists of 15 variables (date, year, season, month, holiday, weekday, workingday, weathersit, temp, atemp, humidity, windspeed, causal (non-registered users), registered, count).
+      </p>
+      <h3>Season variables</h3>
+      <p>Plot 1 and 2 show the relationship between bike rental and season variables. 
+        The bike rental has shown growth during the past two years.
+        We can clearly see that winter months experience higher levels of bike rentals than summer months.</p>
+          <div class="season-image">
+            <img src="images/season variable.png" alt=""/>
+          </div>
+          
+      <h3>Environment variables</h3>
+      <p>
+        The temp, atemp (the feel-like temperature), and humidity are strongly correlated. 
+        We chose between keeping both temp & humidity and keeping only the atemp. In the end, 
+        we decided to keep only the variable atemp since we assume that it represents how hot it really feels for a human 
+        and thus, affects a person's rental decision.
+      </p>
+      <div class="weather-image">
+        <img src="images/weather variable.png" alt=""/>
+      </div>
+
+      <h3>Date variables</h3>
+      <p>
+          We saw that bike rentals on different work days and throughout the weekend have some slight differences. 
+          We decided to include the date variables (holiday, weekday, workingday) in our model to test whether all of 
+          these variables add significantly to the model.
+      </p>
+     </div>
+
+
+    <div class="data-image">
+      <img src="images/date variable.png" alt=""/>
+    </div>
+
+    <div id="modeling" class = "intro">
+        <h1>Modeling</h1>
+        <p>We experimented with different models to characterize the relationship between 
+            the response and predictor variables on our dataset. 
+            Finally, we used our final model to generate forecast values for daily total rentals.</p>
+      </div>
+  
+    
+    <div class="about text-block">
+      <h2 id = "temperature">SARIMA model for temperature</h2>
+      <p>Before implementing the bike rental forecast model, we first used the SARIMA model to predict the temperature information in the next six months 
+          based on the temperature information from the past two years. 
+          Plot 4 is the observed value and the predicted value over the past 2 years. 
+          Plot 5 shows the predicted temperature for the following six months.
+    </p>
+    </div>
+    
+
+    
+    <div class="temperature-forecasting-image">
+      <img src="images/temperature forecasting.png" alt=""/>
+    </div>
+
+    <div class="method text-block">
+      <h2 id = "baseline">Baseline model</h2>
+      <p>To see whether the response variable can be attributed to the explanatory variable, 
+          we ran some quick experiments using simple linear models. We can see that 
+          simply using a single variable does not get clear predictions. 
+          The following is an example of the relationship between 
+          the season variable and the number of bike rentals:	</p>
+    
+    </div>
+    <span> Validation R-square: 0.4537165801764329
+        <br>Validation MAE: 1211.0853376675734</span>
+
+
+    <div class="clients text-block">
+      <h2 id="final">Final Model & Prediction Outcome</h2>
+      <p>Based on our exploratory analysis, we used the season variables ("instant", "year", "season", "month" ), the atemp variables, and the date variables ("holiday", "weekday", “workingday” ) to construct our predictive model. Compared to baseline predictions, 
+          our final model yielded higher R-square and lower MAE. Below is the Validation R-square and 
+          Validation MAE obtained for our final model and the generated forecast rental values. 	</p>
+    </div>
+    <span> Validation R-square: 0.7593567036980462</span>
+    <span><br>Validation MAE: 699.6842915493977</span>
+
+    <div class="final-image">
+      <img src="images/final model and result.png" alt =""/>
+    </div>
+
+    
+  </main>
+
+  </body>
+</html>
